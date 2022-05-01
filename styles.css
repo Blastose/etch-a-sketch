@@ -17,6 +17,15 @@ body {
   padding-right: 32px;
 }
 
+.wrapper-flex {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+  flex: 1;
+}
+
 .header {
   background-color: gold;
 }
@@ -28,6 +37,23 @@ body {
 }
 
 .sketch-window {
+  display: flex;
   background-color: rgb(255, 245, 191);
   flex: 1;
+}
+
+#play-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+div.grid-tile {
+  border: 1px solid black;
+}
+
+div.grid-tile:hover {
+  background-color: rgb(216, 184, 0)
 }
