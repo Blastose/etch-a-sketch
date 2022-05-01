@@ -52,6 +52,7 @@ body {
 
 div.grid-tile {
   border: 1px solid black;
+  background-color: white;
 }
 
 div.grid-tile:hover {

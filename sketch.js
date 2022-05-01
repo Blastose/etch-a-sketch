@@ -6,11 +6,21 @@ function createGrid(dimension, gridSize) {
     tile.classList.add('grid-tile');
     tile.style.height = `${gridSize / dimension}px`;
     tile.style.width = `${gridSize / dimension}px`;
+    tile.addEventListener('mousedown', (e) => {
+      e.target.style['background-color'] = "black";
+    });
     playArea.appendChild(tile);
   }
 }
 
-const gridDimension = 2;
+function clearGrid() {
+  const tiles = document.querySelectorAll('.grid-tile');
+  tiles.forEach((tile) => {
+    tile.remove();
+  })
+}
+
+const gridDimension = 16;
 const gridSize = 500;
 const borderSize = 1;
 createGrid(gridDimension, gridSize - 2 * borderSize * gridDimension);
