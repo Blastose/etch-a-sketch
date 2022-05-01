@@ -7,7 +7,7 @@ function createGrid(dimension, gridSize) {
     tile.style.height = `${gridSize / dimension}px`;
     tile.style.width = `${gridSize / dimension}px`;
     tile.addEventListener('mousedown', (e) => {
-      e.target.style['background-color'] = "black";
+      e.target.style['background-color'] = tileColor;
     });
     playArea.appendChild(tile);
   }
@@ -20,7 +20,15 @@ function clearGrid() {
   })
 }
 
+function updateColorFromColorPicker(e) {
+  console.log(e.target.value);
+  tileColor = e.target.value;
+}
+
 const gridDimension = 16;
 const gridSize = 500;
 const borderSize = 1;
 createGrid(gridDimension, gridSize - 2 * borderSize * gridDimension);
+const colorPicker = document.getElementById('color-pick-main');
+colorPicker.addEventListener('change', updateColorFromColorPicker);
+let tileColor = colorPicker.value;
