@@ -19,6 +19,7 @@ body {
 
 .wrapper-flex {
   max-width: 500px;
+  min-width: 500px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 32px;
