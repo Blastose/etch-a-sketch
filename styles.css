@@ -81,3 +81,21 @@ button {
 button:hover {
   background-color: rgb(255, 104, 104);
 }
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] + label {
+  background-color: rgb(255, 148, 148);
+  border-radius: 5px;
+  padding: 4px 12px;
+  transition-duration: 0.2s;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked + label {
+  background-color: rgb(255, 104, 104);
+}
