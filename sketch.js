@@ -44,6 +44,14 @@ function updateCanvasSize(gridDimension, gridSize) {
   createCanvas(gridDimension, gridSize);
 }
 
+function validateCanvasSize(e) {
+  if (e.target.value > 100) {
+    e.target.value = 100;
+  } else if (e.target.value < 1) {
+    e.target.value = 1;
+  }
+}
+
 let gridDimension = 24;
 const gridSize = 499;
 createCanvas(gridDimension, gridSize);
@@ -57,5 +65,6 @@ clearButton.addEventListener('click', clearCanvas);
 
 const canvasSize = document.getElementById('size');
 canvasSize.addEventListener('change', function(e) {
+  validateCanvasSize(e);
   updateCanvasSize(e.target.value, gridSize);
 });
