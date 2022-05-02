@@ -7,6 +7,7 @@ function createCanvas(dimension, gridSize) {
     console.log(gridSize / dimension);
     tile.style.height = `${gridSize / dimension}px`;
     tile.style.width = `${gridSize / dimension}px`;
+    tile.style.transitionDuration = '0.3s';
     tile.addEventListener('mouseover', (e) => {
       e.target.style['background-color'] = tileColor;
     });
@@ -23,6 +24,13 @@ function clearCanvas() {
 
 function updateColorFromColorPicker(e) {
   tileColor = e.target.value;
+}
+
+function generateRandomColor() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b})`;
 }
 
 const gridDimension = 24;
