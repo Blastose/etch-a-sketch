@@ -61,12 +61,9 @@ body {
 }
 
 div.grid-tile {
-  outline: 1px solid black;
+  outline: 1px dashed rgb(63, 63, 63);
+  transition-duration: 0.2s;
   background-color: white;
-}
-
-div.grid-tile:hover {
-  background-color: rgb(216, 184, 0);
 }
 
 button {

@@ -1,4 +1,4 @@
-function createCanvas(dimension, gridSize) {
+function createCanvas(dimension, gridSize, type) {
   const playArea = document.getElementById('play-area');
   const numTiles = dimension * dimension;
   for (let i = 0; i < numTiles; i++) {
@@ -6,11 +6,36 @@ function createCanvas(dimension, gridSize) {
     tile.classList.add('grid-tile');
     tile.style.height = `${gridSize / dimension}px`;
     tile.style.width = `${gridSize / dimension}px`;
-    tile.style.transitionDuration = '0.3s';
-    tile.addEventListener('mouseover', (e) => {
-      e.target.style['background-color'] = tileColor;
-    });
+    tile.addEventListener(type, changeTileColor);
     playArea.appendChild(tile);
+  }
+}
+
+function changeTileColor(e) {
+  e.target.style['background-color'] = tileColor;
+}
+
+function addChangeTileColorEventListner(eventType) {
+  const tiles = document.querySelectorAll('.grid-tile');
+  tiles.forEach((tile) => {
+    tile.addEventListener(eventType, changeTileColor);
+  });
+}
+
+function removeEventListnerFromTiles(eventType) {
+  const tiles = document.querySelectorAll('.grid-tile');
+  tiles.forEach((tile) => {
+    tile.removeEventListener(eventType, changeTileColor);
+  });
+}
+
+function changeColorPlacementMethod(type) {
+  if (type === "manual") {
+    removeEventListnerFromTiles('mouseover');
+    addChangeTileColorEventListner('click');
+  } else if (type == "normal") {
+    removeEventListnerFromTiles('click');
+    addChangeTileColorEventListner('mouseover');
   }
 }
 
@@ -18,7 +43,7 @@ function clearTiles() {
   const tiles = document.querySelectorAll('.grid-tile');
   tiles.forEach((tile) => {
     tile.remove();
-  })
+  });
 }
 
 function clearCanvas() {
@@ -39,9 +64,9 @@ function generateRandomColor() {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
-function updateCanvasSize(gridDimension, gridSize) {
+function updateCanvasSize(gridDimension, gridSize, type) {
   clearTiles();
-  createCanvas(gridDimension, gridSize);
+  createCanvas(gridDimension, gridSize, type);
 }
 
 function validateCanvasSize(e) {
@@ -52,9 +77,18 @@ function validateCanvasSize(e) {
   }
 }
 
+function setupRadioButtons() {
+  const radioOptions = document.querySelectorAll('.radio');
+  radioOptions.forEach((option) => {
+    option.addEventListener('click', (e) => {
+      changeColorPlacementMethod(e.target.value);
+    });
+  });
+}
+
 let gridDimension = 24;
 const gridSize = 499;
-createCanvas(gridDimension, gridSize);
+createCanvas(gridDimension, gridSize, 'mouseover');
 
 const colorPicker = document.getElementById('color-pick-main');
 colorPicker.addEventListener('change', updateColorFromColorPicker);
@@ -66,5 +100,13 @@ clearButton.addEventListener('click', clearCanvas);
 const canvasSize = document.getElementById('size');
 canvasSize.addEventListener('change', function(e) {
   validateCanvasSize(e);
-  updateCanvasSize(e.target.value, gridSize);
+  let radioCheckedType = document.querySelector('input[name="color-option"]:checked').value;
+  if (radioCheckedType === "manual") {
+    radioCheckedType = 'click'
+  } else if (radioCheckedType == "normal") {
+    radioCheckedType = 'mouseover'
+  }
+  updateCanvasSize(e.target.value, gridSize, radioCheckedType);
 });
+
+setupRadioButtons();
