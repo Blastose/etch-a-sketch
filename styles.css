@@ -82,6 +82,17 @@ button:hover {
   background-color: rgb(255, 104, 104);
 }
 
+input[type="number"] {
+  background-color: rgb(255, 175, 175);
+  border: none;
+  border-radius: 5px;
+  padding: 4px 12px;
+}
+
+input[type="number"]:focus {
+  outline: 2px solid rgb(255, 104, 104);
+}
+
 input[type="radio"] {
   display: none;
 }
