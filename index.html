@@ -20,8 +20,12 @@
         <div id="play-area"></div>
         <div class="options">
           <div class="color-options">
-            <input type="color" id="color-pick-main" name="color-pick-main" value="#000000">
             <label for="color-pick-main">Color</label>
+            <input type="color" id="color-pick-main" name="color-pick-main" value="#000000">
+          </div>
+          <div class="canvas-size">
+            <label for="size">Canvas size</label>
+            <input type="number" id="size" name="size" min="1" max="100" value="24">
           </div>
           <div>
             <button id="clear">Clear canvas</button>

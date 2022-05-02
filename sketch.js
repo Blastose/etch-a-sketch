@@ -4,7 +4,6 @@ function createCanvas(dimension, gridSize) {
   for (let i = 0; i < numTiles; i++) {
     const tile = document.createElement('div');
     tile.classList.add('grid-tile');
-    console.log(gridSize / dimension);
     tile.style.height = `${gridSize / dimension}px`;
     tile.style.width = `${gridSize / dimension}px`;
     tile.style.transitionDuration = '0.3s';
@@ -13,6 +12,13 @@ function createCanvas(dimension, gridSize) {
     });
     playArea.appendChild(tile);
   }
+}
+
+function clearTiles() {
+  const tiles = document.querySelectorAll('.grid-tile');
+  tiles.forEach((tile) => {
+    tile.remove();
+  })
 }
 
 function clearCanvas() {
@@ -33,11 +39,23 @@ function generateRandomColor() {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
-const gridDimension = 24;
+function updateCanvasSize(gridDimension, gridSize) {
+  clearTiles();
+  createCanvas(gridDimension, gridSize);
+}
+
+let gridDimension = 24;
 const gridSize = 499;
 createCanvas(gridDimension, gridSize);
+
 const colorPicker = document.getElementById('color-pick-main');
 colorPicker.addEventListener('change', updateColorFromColorPicker);
 let tileColor = colorPicker.value;
+
 const clearButton = document.getElementById('clear');
 clearButton.addEventListener('click', clearCanvas);
+
+const canvasSize = document.getElementById('size');
+canvasSize.addEventListener('change', function(e) {
+  updateCanvasSize(e.target.value, gridSize);
+});
